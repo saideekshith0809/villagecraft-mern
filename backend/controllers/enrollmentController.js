@@ -6,7 +6,9 @@ const enrollInWorkshop = async (req, res) => {
   try {
     const workshop = await Workshop.findById(workshopId);
     if (!workshop) return res.status(404).json({ message: 'Workshop not found' });
-    if (workshop.availableSeats <= 0) return res.status(400).json({ message: 'No seats available' });
+    
+    const trueEnrolledCount = await Enrollment.countDocuments({ workshop: workshopId });
+    if (trueEnrolledCount >= workshop.maxParticipants) return res.status(400).json({ message: 'No seats available' });
 
     // Check duplicate
     const existing = await Enrollment.findOne({ workshop: workshopId, email });
@@ -23,8 +25,8 @@ const enrollInWorkshop = async (req, res) => {
       message
     });
 
-    // Decrease available seats
-    workshop.availableSeats -= 1;
+    // Increase enrolled count
+    workshop.enrolledCount += 1;
     await workshop.save();
 
     res.status(201).json({ message: 'Enrollment successful!', enrollment });
@@ -37,11 +39,13 @@ const getMyEnrollments = async (req, res) => {
   try {
     const enrollments = await Enrollment.find({ email: req.user.email }).populate('workshop');
     // Extract just the workshop objects from enrollment records
-    const workshops = enrollments.map(e => ({
-      ...e.workshop.toObject(),
-      enrollmentId: e._id,
-      enrolledAt: e.createdAt
-    }));
+    const workshops = enrollments
+      .filter(e => e.workshop)
+      .map(e => ({
+        ...e.workshop.toObject(),
+        enrollmentId: e._id,
+        enrolledAt: e.createdAt
+      }));
     res.json(workshops);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
