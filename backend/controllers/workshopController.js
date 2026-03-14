@@ -35,8 +35,7 @@ const createWorkshop = async (req, res) => {
   try {
     const workshop = new Workshop({
       ...req.body,
-      trainer: req.user.id,
-      availableSeats: req.body.maxParticipants
+      trainer: req.user.id
     });
     const createdWorkshop = await workshop.save();
     res.status(201).json(createdWorkshop);

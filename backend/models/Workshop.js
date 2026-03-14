@@ -13,7 +13,6 @@ const workshopSchema = new mongoose.Schema({
   skillLevel: { type: String, enum: ['Beginner', 'Intermediate', 'Advanced'], default: 'Beginner' },
   maxParticipants: Number,
   enrolledCount: { type: Number, default: 0 },
-  availableSeats: Number,
   rating: { type: Number, default: 0 },
   description: String,
   status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
