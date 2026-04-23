@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
   rating: { type: Number, default: 0 },
   skills: [String],
   likedWorkshops: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workshop' }],
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   createdAt: { type: Date, default: Date.now }
 });
 

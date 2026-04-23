@@ -71,15 +71,33 @@ VillageCraft is a premium MERN stack platform designed to bridge the gap between
 ```bash
 VillageCraft/
 ├── backend/            # Express server, MongoDB models, and API routes
+<<<<<<< HEAD
 │   ├── models/         # Database schemas
 │   ├── routes/         # API endpoints
 │   ├── controllers/    # Business logic
+=======
+│   ├── controllers/    # Business logic
+│   ├── middleware/     # Custom Express middleware
+│   ├── models/         # Database schemas
+│   ├── routes/         # API endpoints
+│   ├── seed.js         # Database seeder script
+>>>>>>> 5327cf2 (update)
 │   └── server.js       # Entry point
 ├── myapp/              # React frontend
 │   ├── src/
 │   │   ├── components/ # Reusable UI components
+<<<<<<< HEAD
 │   │   ├── pages/      # Full-page views
 │   │   ├── services/   # API abstracting
+=======
+│   │   ├── context/    # React context providers
+│   │   ├── data/       # Static/mock data files
+│   │   ├── pages/      # Full-page views
+│   │   ├── services/   # API abstraction
+│   │   ├── translations/ # i18n translation files
+│   │   ├── utils/      # Utility functions
+│   │   ├── claude.jsx  # Claude integration component
+>>>>>>> 5327cf2 (update)
 │   │   └── App.js      # Main application logic
 └── README.md           # You are here
 ```
@@ -94,4 +112,8 @@ This project is licensed under the ISC License.
 
 ---
 
+<<<<<<< HEAD
 *Crafted with ❤️ for Village Artisans.*
+=======
+*Crafted with ❤️ for Village Artisans.*
+>>>>>>> 5327cf2 (update)
